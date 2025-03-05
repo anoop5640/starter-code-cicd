@@ -2,9 +2,7 @@ name: Greeting
 
 # Trigger the workflow on push to main or pull request to main
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 # Define jobs
 jobs:
