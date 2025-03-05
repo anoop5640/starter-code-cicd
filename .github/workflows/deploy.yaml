@@ -17,5 +17,5 @@ jobs:
       - name: Checkout code
         run: |
           echo " Cloning repo code"
-          echo "${{secrets.REPO_NAME}}"
+          echo "${{toJson(secrets.REPO_NAME)}}"
           git clone https://github.com/${{secrets.REPO_NAME}}.git
