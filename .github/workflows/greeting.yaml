@@ -1,11 +1,17 @@
-name: React Greeting workflow
+name: Greeting
+
+# Trigger the workflow on push to main or pull request to main
 on:
   push:
-    branches: -main
+    branches:
+      - main
 
+# Define jobs
 jobs:
-  greet:
-    runs-on: ubuntu-latest
+  greeting:
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+
     steps:
-      - name: "Greet"
-        run: echo "hello world"
+      # Step 1: Check out the repository
+      - name: Checkout code
+        run: echo " hello world"
