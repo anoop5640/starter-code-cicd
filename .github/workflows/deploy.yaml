@@ -1,0 +1,21 @@
+name: Greeting
+
+# Trigger the workflow on push to main or pull request to main
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Define jobs
+jobs:
+  test:
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout code
+        run: |
+          echo " Cloning repo code"
+          echo "$REPO_NAME"
+          git clone https://github.com/$REPO_NAME.git
