@@ -15,7 +15,15 @@ jobs:
     steps:
       # Step 1: Check out the repository
       - name: Checkout code
-        run: |
-          echo " Cloning repo code"
-          echo "${{toJson(github)}}"
-          git clone https://github.com/${{github.repository}}.git
+        uses: actions/checkout@v4
+      - name: Installing Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Print node verison
+        run: node -v
+      - name: Install dependencies
+        run: npm ci # uses clean install reads requirement frmo json lock file
+        #better than npm install
+      - name: Run test
+        run: npm run test
