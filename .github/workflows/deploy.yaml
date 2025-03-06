@@ -5,11 +5,12 @@ on:
   push:
     branches:
       - main
+      - "feature/**"
   workflow_dispatch:
 
 # Define jobs
 jobs:
-  test:
+  Test:
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
 
     steps:
@@ -33,8 +34,8 @@ jobs:
       - name: Run test
         run: npm run test
 
-  deploy:
-    needs: test
+  Build:
+    needs: Test
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
     steps:
       - name: get code
@@ -53,5 +54,22 @@ jobs:
         run: npm ci
       - name: Build project
         run: npm run build
+          echo "building ....build succesfully"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-file
+          path: dist
+
+  Deploy:
+    needs: Build
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-file
+          path: dist
       - name: deploy
         run: echo "deploying ....Deployed succesfully"
